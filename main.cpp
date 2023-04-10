@@ -5,19 +5,19 @@
 // #include <iomanip>
 // #include <regex>
 // #include <limits.h>
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 // For Excel handling
 // #include "libxl.h"//Not found
-// Time 
+// Time
 // #include<chrono>
 // #include <ctime>
 
 using namespace std;
 /****************************************************************************
- 
+
  //Class :       CAccount
  //Description:  It is collection of data regarding a Bank Management System.
- //              It consists various data members and methods which effectively generate 
+ //              It consists various data members and methods which effectively generate
  //              a bank management system.
 
  //Remarks:      Added validations to all data types using Regex.
@@ -25,13 +25,12 @@ using namespace std;
  //Last Modified By:  Abhishek Bedare (Trainee ODIN 63MTT01348)
 
  //Last Modified Date:  March 27, 2023
- 
+
  ***************************************************************************/
-    
-   
+
 class CAccount
 {
-    public:
+public:
     int m_nAccountNumber;
     char m_strFirstName[10];
     char m_strLastName[10];
@@ -46,16 +45,33 @@ class CAccount
     float m_fMedicalInsCover;
     float m_fMutualFundInvAmt;
     float m_fLifeInsPolicyCover[3] = {0};
-    char m_strNominee[6][10];
+    char m_strNominee[6][10] = {0};
     char m_strAccountStatus;
     char m_cLocker, m_cPassbook, m_cEStatement;
 
     static int m_snNextAccountNum;
-    CAccount(){
- this->m_strAccountStatus='A' ;
- this->m_fFixedDepositAmt = 0; 
-      this->   m_fMedicalInsCover = 0;
-       this->  m_fMutualFundInvAmt = 0;
+    CAccount()
+    {
+        this->m_strAccountStatus = 'A';
+        this->m_fFixedDepositAmt = 0;
+        this->m_fMedicalInsCover = 0;
+        this->m_fMutualFundInvAmt = 0;
+        strcmp(this->m_strCityName, "");
+        strcmp(this->m_strDematAccNumber, "");
+        strcmp(this->m_strEmail, "");
+        strcmp(this->m_strFirstName, "");
+        strcmp(this->m_strLastName, "");
+        strcmp(this->m_strMobileNumber, "");
+        this->m_fSavingAccBalance = 0;
+        this->m_fCurrentAccBalance = 0;
+        this->m_cAccountType = 'S';
+        this->m_cLocker = 'N';
+        this->m_cPassbook = 'N';
+        this->m_cEStatement = 'N';
+        this->m_nAccountNumber = 0;
+        this->m_strAccountStatus = 'A';
+        // memset(this->m_strNominee, 0, sizeof(this->m_strNominee)); // initialize the array
+        // initialize the array
     };
 
     void CreateAccount();
@@ -81,7 +97,6 @@ class CAccount
 void ImportRecords();
 void ExportRecords();
 
-    
 int CAccount::m_snNextAccountNum = 1;
 
 bool CAccount::IsValidMobileNumber(string strMobileNumber)
@@ -196,7 +211,7 @@ void CAccount::SetLastAccountNumber(long nValue)
 // }
 void CAccount::CreateAccount()
 {
-   m_nAccountNumber=m_snNextAccountNum++;
+    m_nAccountNumber = m_snNextAccountNum++;
     char lcNomineeName[15];
     int lnChoice;
     float lfSwapper;
@@ -213,8 +228,8 @@ void CAccount::CreateAccount()
         cout << "\nFirst Name: ";
         cin >> m_strFirstName;
     }
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
     cout << "\nEnter the Last Name of the Account holder : ";
     cin >> m_strLastName;
@@ -230,14 +245,16 @@ void CAccount::CreateAccount()
     {
         cout << "\nEnter Type of the Account (C/S) : ";
         cin >> m_cAccountType;
-
+ cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
         if (m_cAccountType == 'C' || m_cAccountType == 'c' || m_cAccountType == 'S' || m_cAccountType == 's')
         {
             m_cAccountType = toupper(m_cAccountType);
             break;
         }
         cout << "Please enter C/S only.";
-    }
+    }   
+    cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
     cout << "\nPlease Enter Initial Account Balance\nMin Balance for Saving Account: Rs 1000.";
@@ -245,13 +262,15 @@ void CAccount::CreateAccount()
     if (GetAccountType() == 'S')
     {
         m_fSavingAccBalance = ValidateAmount(m_fSavingAccBalance);
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+         cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
         m_fCurrentAccBalance = 0;
     }
     else
     {
         m_fCurrentAccBalance = ValidateAmount(m_fCurrentAccBalance);
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
         m_fSavingAccBalance = 0;
     }
 
@@ -261,21 +280,27 @@ void CAccount::CreateAccount()
     {
         cout << "Plase enter a valid City Name: ";
         cin >> m_strCityName;
-    }
+         cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+   
 
     cout << "\nEnter Your Mobile Number : ";
     cin >> m_strMobileNumber;
-
+ cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     while (!IsValidMobileNumber(m_strMobileNumber))
     {
         cout << "Please enter a valid mobile number: ";
         cin >> m_strMobileNumber;
+         cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 
     cout << "\nEnter Your Email: ";
     cin >> m_strEmail;
-
+ cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     while (!IsValidEmail(m_strEmail))
     {
         cout << "Enter a valid email: ";
@@ -311,6 +336,8 @@ void CAccount::CreateAccount()
             {
                 cout << "\nDo you want to avail Locker facility? (Y/N): ";
                 cin >> m_cLocker;
+               cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
                 if (m_cLocker == 'Y' || m_cLocker == 'y' || m_cLocker == 'N' || m_cLocker == 'n')
                 {
@@ -351,16 +378,16 @@ void CAccount::CreateAccount()
         case 4:
             cout << "\nPlease Enter an Amount for Fixed Deposit";
             m_fFixedDepositAmt = ValidateAmount(m_fFixedDepositAmt);
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
+             cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cout << "\nTransaction successful. Your request is approved!";
             cout << "\nFixed Deposit of Rs " << m_fFixedDepositAmt << " has been created for A/C " << m_nAccountNumber;
             break;
         case 5:
             cout << "\nPlease Enter Medical Insurance Coverage Plan Amount";
             m_fMedicalInsCover = ValidateAmount(m_fMedicalInsCover);
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
+           cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cout << "\nTransaction successful. Your request is approved!";
             cout << "\nYou are insured under medical insurance coverage of RS" << m_fMedicalInsCover;
             break;
@@ -375,7 +402,8 @@ void CAccount::CreateAccount()
                 // cin>> lfSwapper;
 
                 m_fLifeInsPolicyCover[lnLifeInsPolicyCount] = ValidateAmount(lfSwapper);
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                 cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
                 if (lnLifeInsPolicyCount == 2)
                 {
@@ -384,7 +412,8 @@ void CAccount::CreateAccount()
                 }
                 cout << "\nDo you want to add more?(Y/N) ";
                 cin >> lcFlagforLifeIns;
-
+ cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 lnLifeInsPolicyCount++;
             }
 
@@ -399,23 +428,31 @@ void CAccount::CreateAccount()
                 cout << "Nominee" << lnNomineeCount2 + 1 << " ";
                 cout << "\nEnter First Name ";
                 cin >> lcNomineeName;
+                 cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 while (!IsValidName(lcNomineeName))
                 {
                     cout << "Name should have alphabets only and length in range 2-20.";
                     cout << "\nFirst Name: ";
                     cin >> lcNomineeName;
+                     cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 }
-               strcpy(m_strNominee[lnNomineeCount],lcNomineeName)  ;
+                strcpy(m_strNominee[lnNomineeCount], lcNomineeName);
 
                 cout << "\nEnter Last Name ";
                 cin >> lcNomineeName;
+                 cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 while (!IsValidName(lcNomineeName))
                 {
                     cout << "Name should have alphabets only and length in range 2-20.";
                     cout << "\nLast Name: ";
                     cin >> lcNomineeName;
+                     cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 }
-  strcpy(m_strNominee[lnNomineeCount+1],lcNomineeName)  ;
+                strcpy(m_strNominee[lnNomineeCount + 1], lcNomineeName);
                 if (lnNomineeCount2 == 2)
                 {
                     cout << "\nYou have successfully added 3 Nominees\n";
@@ -433,7 +470,8 @@ void CAccount::CreateAccount()
 
             cout << "\nPlease Enter an Amount To Invest in our Star Mutual Fund";
             m_fMutualFundInvAmt = ValidateAmount(m_fMutualFundInvAmt);
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+             cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
             cout << "\nTransaction Successful. Your Request is Approved!";
             cout << "\nYou have Successfully Invested an Amount of RS " << m_fMutualFundInvAmt << " in Star Mutual Fund ";
@@ -444,11 +482,14 @@ void CAccount::CreateAccount()
             cout << "\nFor CDSL: 16 digit numric \nFor NSDL: 16 character starting with “IN” followed by a 14-digit numeric code";
             cout << "\nEnter here:";
             cin >> m_strDematAccNumber;
-
+ cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
             while (!IsValidDematAccNumber(m_strDematAccNumber))
             {
                 cout << "Enter a Valid Demat Account Number: ";
                 cin >> m_strDematAccNumber;
+                 cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
             break;
         case 10:
@@ -505,6 +546,8 @@ void CAccount::Modify()
             {
                 cout << "\nUpdate your choice for locker.\nDo you want to avail Locker facility? (Y/N): ";
                 cin >> m_cLocker;
+                 cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
                 if (m_cLocker == 'Y' || m_cLocker == 'y' || m_cLocker == 'N' || m_cLocker == 'n')
                 {
@@ -519,6 +562,8 @@ void CAccount::Modify()
             {
                 cout << "\nUpdate your choice for passbook.\nDo you want to avail Passbook facility? (Y/N): ";
                 cin >> m_cPassbook;
+                 cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
                 if (m_cPassbook == 'Y' || m_cPassbook == 'y' || m_cPassbook == 'N' || m_cPassbook == 'n')
                 {
@@ -533,6 +578,8 @@ void CAccount::Modify()
             {
                 cout << "\nUpdate your choice for eStatment.\nDo you want to avail eStatement facility? (Y/N): ";
                 cin >> m_cEStatement;
+                 cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
                 if (m_cEStatement == 'Y' || m_cEStatement == 'y' || m_cEStatement == 'N' || m_cEStatement == 'n')
                 {
@@ -547,21 +594,23 @@ void CAccount::Modify()
             cout << "\n1.Add Amount to FD\n2.Withdraw Amount from FD\n3.Close FD\n";
             cout << "Your Choice: ";
             cin >> lnChoiceForFD;
+             cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
             if (lnChoiceForFD == 1)
             {
 
                 cout << "\nPlase Enter an Amount for Investing More in Your Fixed Deposit.";
                 m_fFixedDepositAmt += ValidateAmount(lfAmtForFD);
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                cout << "\nTransaction Successful. Your request is approved!";
+ cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');                cout << "\nTransaction Successful. Your request is approved!";
                 cout << "\nUpdated FD Balance: " << m_fFixedDepositAmt;
             }
             else if (lnChoiceForFD == 2)
             {
                 cout << "\nPlease Enter Amount to Withdraw from Your Fixed Deposit Account.";
                 lfAmtForFD2 = ValidateAmount(lfAmtForFD);
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                if (lfAmtForFD2 <= m_fFixedDepositAmt)
+ cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');                if (lfAmtForFD2 <= m_fFixedDepositAmt)
                 {
                     m_fFixedDepositAmt -= lfAmtForFD2;
                     cout << "\nTransaction successful. Your request is approved!\nUpdated FD Balance: " << m_fFixedDepositAmt;
@@ -587,7 +636,8 @@ void CAccount::Modify()
             cout << "\nPlease enter updated Medical Insurance Coverage amount: Rs";
 
             m_fMedicalInsCover = ValidateAmount(m_fMedicalInsCover);
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+             cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cout << "\nTransaction successful. Your request is approved!";
             cout << "\nYour new medical insurance coverage: RS" << m_fMedicalInsCover;
             break;
@@ -600,7 +650,8 @@ void CAccount::Modify()
                 cout << "Amount for Policy " << lnLifeInsPolicyCount + 1 << " ";
 
                 m_fLifeInsPolicyCover[lnLifeInsPolicyCount] = ValidateAmount(lfSwapper);
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+             cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
                 if (lnLifeInsPolicyCount == 2)
                 {
@@ -609,7 +660,8 @@ void CAccount::Modify()
                 }
                 cout << "\nDo you want to add more?(Y/N) ";
                 cin >> lcFlagforLifeIns;
-
+ cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 lnLifeInsPolicyCount++;
             }
 
@@ -624,22 +676,30 @@ void CAccount::Modify()
                 cout << "Nominee" << lnNomineeCount2 + 1 << " ";
                 cout << "\nEnter First Name ";
                 cin >> lcNomineeName;
+                 cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 while (!IsValidName(lcNomineeName))
                 {
                     cout << "Name should have alphabets only and length in range 2-20.";
                     cout << "\nFirst Name: ";
                     cin >> lcNomineeName;
+                     cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 }
-  strcpy(m_strNominee[lnNomineeCount],lcNomineeName)  ;
+                strcpy(m_strNominee[lnNomineeCount], lcNomineeName);
                 cout << "\nEnter Last Name ";
                 cin >> lcNomineeName;
+                 cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 while (!IsValidName(lcNomineeName))
                 {
                     cout << "Name should have alphabets only and length in range 2-20.";
                     cout << "\nLast Name: ";
                     cin >> lcNomineeName;
+                     cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 }
-  strcpy(m_strNominee[lnNomineeCount+1],lcNomineeName)  ;
+                strcpy(m_strNominee[lnNomineeCount + 1], lcNomineeName);
                 if (lnNomineeCount2 == 2)
                 {
                     cout << "\nYou have successfully added 3 Nominees\n";
@@ -648,6 +708,8 @@ void CAccount::Modify()
 
                 cout << "\nDo you want to add more?(Y/N) ";
                 cin >> lcFlagForNominee;
+                 cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
                 lnNomineeCount += 2;
                 lnNomineeCount2++;
@@ -659,11 +721,15 @@ void CAccount::Modify()
             cout << "\n1.Add amount to MF\n2.Withdraw amount from MF\n3.Close MF\n";
             cout << "Your Choice: ";
             cin >> lnChoiceForMF;
+             cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
             if (lnChoiceForMF == 1)
             {
 
                 cout << "\nPlease enter amount to add to your Mutual Fund account";
                 cin >> lfAmtForMF;
+                 cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
                 m_fMutualFundInvAmt += ValidateAmount(lfAmtForMF);
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -676,7 +742,8 @@ void CAccount::Modify()
                 cout << "\nPlease enter amount to withdraw from your Mutual Fund Account";
 
                 lfAmtForMF2 = ValidateAmount(lfAmtForMF);
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                 cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 if (lfAmtForMF2 <= m_fMutualFundInvAmt)
                 {
                     m_fMutualFundInvAmt -= lfAmtForMF2;
@@ -705,11 +772,14 @@ void CAccount::Modify()
             cout << "\nFor CDSL: 16 digit numric \nFor NSDL: 16 character starting with “IN” followed by a 14-digit numeric code";
             cout << "\nEnter here:";
             cin >> m_strDematAccNumber;
-
+ cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
             while (!IsValidDematAccNumber(m_strDematAccNumber))
             {
                 cout << "Enter a valid Demat Account Number: ";
                 cin >> m_strDematAccNumber;
+                 cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
             cout << "Your Demat account number has been successfully updated....";
             break;
@@ -718,6 +788,8 @@ void CAccount::Modify()
             {
                 cout << "\nUpdated Type of Account (C/S) : ";
                 cin >> lcTempForAccType;
+                 cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 lcTempForAccType = toupper(lcTempForAccType);
                 if (lcTempForAccType == GetAccountType())
                 {
@@ -731,7 +803,6 @@ void CAccount::Modify()
                 }
                 cout << "Please enter C/S only.";
             }
-            
 
             lfSwapper = m_fSavingAccBalance;
             m_fSavingAccBalance = m_fCurrentAccBalance;
@@ -743,13 +814,17 @@ void CAccount::Modify()
 
             cout << "\nUpdated City Name: ";
             cin >> m_strCityName;
+             cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
             while (!IsValidName(m_strCityName))
             {
                 cout << "Plase enter a valid City Name: ";
                 cin >> m_strCityName;
+                 cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Your city name has been successfully updated....";
+ cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');            cout << "Your city name has been successfully updated....";
             break;
         case 12:
 
@@ -759,6 +834,8 @@ void CAccount::Modify()
             {
                 cout << "Please enter a valid mobile number: ";
                 cin >> m_strMobileNumber;
+                 cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
 
             cout << "Your Mobile Number has been Successfully Updated....";
@@ -767,11 +844,15 @@ void CAccount::Modify()
 
             cout << "\nUpdated Email: ";
             cin >> m_strEmail;
+             cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
             while (!IsValidEmail(m_strEmail))
             {
                 cout << "Enter a valid email: ";
 
                 cin >> m_strEmail;
+                 cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
             cout << "Your email has been successfully updated....";
             break;
@@ -789,8 +870,8 @@ void CAccount::Modify()
 void CAccount::CloseAccount()
 {
     cout << "\nAccount No. : " << m_nAccountNumber;
-    cin.getline(m_strFirstName,10);
-    //getline(cin, m_strFirstName);
+    cin.getline(m_strFirstName, 10);
+    // getline(cin, m_strFirstName);
     m_fSavingAccBalance = 0;
     m_fCurrentAccBalance = 0;
     m_strAccountStatus = 'C';
@@ -855,7 +936,7 @@ void CAccount::Report() const
 
     cout << "\nNominee Details: " << endl;
 
-    for (int lnItr = 0; lnItr < 6 && m_strNominee[lnItr] != ""; lnItr += 2)
+    for (int lnItr = 0; lnItr < 6 && m_strNominee[lnItr] != "0"; lnItr += 2)
 
     {
 
@@ -899,45 +980,43 @@ void ModifyRecord(int);
 void DeleteRecord(int);
 void DisplayAllRecords();
 void WithdrawBalance(int, int);
-void AutoIncrement(){
+void AutoIncrement()
+{
     CAccount ac;
     fstream inFile;
-    inFile.open("bank.bin",ios::binary|ios::in);
+    inFile.open("bank.bin", ios::binary | ios::in);
     if (!inFile)
     {
-        
-        cout << "File could not be open  !! Press any Key...";
-        return;
 
+        cout << "No previous records found  !! Press any Key...";
+        return;
     }
     // last object
-    
-    inFile.seekg(-1*(int)sizeof(CAccount),ios::end);
+
+    inFile.seekg(-1 * (int)sizeof(CAccount), ios::end);
     inFile.read(reinterpret_cast<char *>(&ac), sizeof(CAccount));
-    ac.SetLastAccountNumber  (ac.GetAccountNumber()+1);
+    ac.SetLastAccountNumber(ac.GetAccountNumber() + 1);
     // inFile.seekg(sizeof(CAccount));
     // inFile.read(reinterpret_cast<char *>(&ac), sizeof(CAccount))
-    cout<<"Next account no. is "<<ac.m_snNextAccountNum<<endl;
+    cout << "Next account no. is " << ac.m_snNextAccountNum << endl;
     // cout<<ac.m_nAccountNumber;
-       
 
     inFile.close();
-   
 }
 int main()
 {
-try {
-  // Block of code to try
-  AutoIncrement();
-}
-catch (exception& e) {
-    // Error handling
-    cout<<"Error occured";
-}
-   
-  
+    try
+    {
+        // Block of code to try
+        AutoIncrement();
+    }
+    catch (exception &e)
+    {
+        // Error handling
+        cout << "Error occured";
+    }
 
-   int lcChoice;// updated by kunal to int for more options in menu
+    int lcChoice; // updated by kunal to int for more options in menu
     int lnNumber;
     do
     {
@@ -954,12 +1033,12 @@ catch (exception& e) {
         cout << "\n5. DISPLAY ALL RECORDS";
         cout << "\n6. CLOSE AN ACCOUNT";
         cout << "\n7. MODIFY AN ACCOUNT";
-    // Modified by Kunal
+        // Modified by Kunal
         cout << "\n8. IMPORT";
         cout << "\n9. EXPORT";
-       
+
         cout << "\n10. EXIT";
-    //END
+        // END
         cout << "\nYour Choice: ";
 
         cin >> lcChoice;
@@ -983,8 +1062,6 @@ catch (exception& e) {
             break;
         case 4:
 
-        
-
             DisplayAccount();
             break;
         case 5:
@@ -1004,7 +1081,7 @@ catch (exception& e) {
             break;
         // Added by Kunal
         case 8:
-           
+
             ImportRecords();
             break;
 
@@ -1016,7 +1093,7 @@ catch (exception& e) {
 
             cout << "\n\nThanks for using our Services.\nHave a nice day!";
             break;
-        //END
+        // END
         default:
             cout << "Invalid Option";
             break;
@@ -1032,15 +1109,15 @@ void WriteRecordToFile()
 
     CAccount ac;
     fstream outFile;
-   
-    outFile.open("bank.bin",ios::out| ios::binary | ios::app);
+
+    outFile.open("bank.bin", ios::out | ios::binary | ios::app);
     // cout<<"size of object"<<sizeof(ac)<<endl;
     // cout<<"size of class"<<sizeof(CAccount)<<endl;
 
-    //cout <<"\nBefore CreateAccount():"<< ac.GetAccountNumber() << endl;
-    
+    // cout <<"\nBefore CreateAccount():"<< ac.GetAccountNumber() << endl;
+
     ac.CreateAccount();
-    cout <<"\nAfter CreateAccount():"<< ac.GetAccountNumber() << endl;
+    cout << "\nNext account number will be:" << ac.GetAccountNumber()+1<< endl;
     outFile.write(reinterpret_cast<char *>(&ac), sizeof(CAccount));
     outFile.close();
 }
@@ -1050,83 +1127,82 @@ void DisplayAccount()
     CAccount lCAccount;
     bool lbFlag = false;
     int lnNumber;
-    do{
-cout<<"1 . Search with account number"<<endl;
-    cout<<"2 . Search with account holder name"<<endl;
-    cout<<"3 . Search with account holder mobile number"<<endl;
-    cout<<"4 . Search with account holder email id"<<endl;
-    cin>>lnNumber;
-    }
-    while(lnNumber>4 || lnNumber<1);
-
-if(lnNumber==1){
-    
-    cout << "\n\n\tEnter The account No. : ";
-    int lnAccountNumber;
-    cin >> lnAccountNumber;
-
-
-    fstream inFile;
-    inFile.open("bank.bin", ios::in|ios::binary);
-
-    if (!inFile)
+    do
     {
-        cout << "File could not be open !! Press any Key...";
-        return;
-    }
-    cout << "\nBALANCE DETAILS\n";
-    while (inFile.read(reinterpret_cast<char *>(&lCAccount), sizeof(CAccount)))
+        cout << "1 . Search with account number" << endl;
+        cout << "2 . Search with account holder name" << endl;
+        cout << "3 . Search with account holder mobile number" << endl;
+        cout << "4 . Search with account holder email id" << endl;
+        cin >> lnNumber;
+    } while (lnNumber > 4 || lnNumber < 1);
+
+    if (lnNumber == 1)
     {
-        if (lCAccount.GetAccountNumber() == lnAccountNumber)
+
+        cout << "\n\n\tEnter The account No. : ";
+        int lnAccountNumber;
+        cin >> lnAccountNumber;
+
+        fstream inFile;
+        inFile.open("bank.bin", ios::in | ios::binary);
+
+        if (!inFile)
         {
-            lCAccount.Report();
-            lCAccount.GetAccountType() == 'S' ? cout << "Your Saving Account balance is RS " << lCAccount.GetAccountBalance()
-                                       : cout << "Your Current Account balance is RS " << lCAccount.GetAccountBalance();
-
-            lbFlag = true;
+            cout << "File could not be open !! Press any Key...";
+            return;
         }
-    }
-    inFile.close();
-    if (lbFlag == false)
-        cout << "\n\n\t\t\tAccount number does not exist";
-    }
-    else{
-    cout << "\n\n\tEnter The account holder name or mobile number or email: ";
-    char  lnAccountDetail[20];
-    scanf_s("%s", lnAccountDetail );
-
-fstream inFile;
-    inFile.open("bank.bin",ios::in| ios::binary);
-    if (!inFile)
-    {
-        cout << "File could not be open !! Press any Key...";
-        return;
-    }
-    cout << "\nBALANCE DETAILS\n";
-    while (inFile.read(reinterpret_cast<char *>(&lCAccount), sizeof(CAccount)))
-    {
-        // optimize this code
-        if (strcmp(lCAccount.m_strFirstName, lnAccountDetail) ==0 ||strcmp(lCAccount.m_strLastName, lnAccountDetail) ==0  || strcmp(lCAccount.m_strEmail,lnAccountDetail) ==0 )
+        cout << "\nBALANCE DETAILS\n";
+        while (inFile.read(reinterpret_cast<char *>(&lCAccount), sizeof(CAccount)))
         {
-          lCAccount.Report();
-           lCAccount.GetAccountType() == 'S' ? cout << "Your Saving Account balance is RS " << lCAccount.GetAccountBalance()
-                                       : cout << "Your Current Account balance is RS " << lCAccount.GetAccountBalance();
+            if (lCAccount.GetAccountNumber() == lnAccountNumber)
+            {
+                lCAccount.Report();
+                lCAccount.GetAccountType() == 'S' ? cout << "Your Saving Account balance is RS " << lCAccount.GetAccountBalance()
+                                                  : cout << "Your Current Account balance is RS " << lCAccount.GetAccountBalance();
 
-            lbFlag = true;
+                lbFlag = true;
+            }
         }
+        inFile.close();
+        if (lbFlag == false)
+            cout << "\n\n\t\t\tAccount number does not exist";
     }
-    inFile.close();
-    if (lbFlag == false)
-        cout << "\n\n\t\t\tAccount number does not exist";
-    }
+    else
+    {
+        cout << "\n\n\tEnter The account holder name or mobile number or email: ";
+        char lnAccountDetail[20];
+        scanf_s("%s", lnAccountDetail);
 
-    
+        fstream inFile;
+        inFile.open("bank.bin", ios::in | ios::binary);
+        if (!inFile)
+        {
+            cout << "File could not be open !! Press any Key...";
+            return;
+        }
+        cout << "\nBALANCE DETAILS\n";
+        while (inFile.read(reinterpret_cast<char *>(&lCAccount), sizeof(CAccount)))
+        {
+            // optimize this code
+            if (strcmp(lCAccount.m_strFirstName, lnAccountDetail) == 0 || strcmp(lCAccount.m_strLastName, lnAccountDetail) == 0 || strcmp(lCAccount.m_strEmail, lnAccountDetail) == 0)
+            {
+                lCAccount.Report();
+                lCAccount.GetAccountType() == 'S' ? cout << "Your Saving Account balance is RS " << lCAccount.GetAccountBalance()
+                                                  : cout << "Your Current Account balance is RS " << lCAccount.GetAccountBalance();
+
+                lbFlag = true;
+            }
+        }
+        inFile.close();
+        if (lbFlag == false)
+            cout << "\n\n\t\t\tAccount number does not exist";
+    }
 }
 
 void ModifyRecord(int nNumber)
 {
     bool lfFound = false;
-    CAccount ac; 
+    CAccount ac;
     fstream File;
     File.open("bank.bin", ios::binary | ios::in | ios::out);
     if (!File)
@@ -1191,7 +1267,7 @@ void DisplayAllRecords()
 {
     CAccount ac;
     fstream inFile;
-    inFile.open("bank.bin",ios::in|ios::binary);
+    inFile.open("bank.bin", ios::in | ios::binary);
     if (!inFile)
     {
         cout << "File could not be open !! Press any Key...";
@@ -1242,8 +1318,10 @@ void WithdrawBalance(int nNumber, int nOption)
                 if (lnBal < 0)
                     cout << "Error....Insufficient Balance.";
                 else
+                {
                     ac.Withdraw(lnAmount);
-                cout << "\nRs" << lnAmount << " has been withdrawn from your account.";
+                    cout << "\nRs" << lnAmount << " has been withdrawn from your account.";
+                }
             }
             int lnPos = (-1) * static_cast<int>(sizeof(ac));
             File.seekp(lnPos, ios::cur);
@@ -1267,194 +1345,187 @@ void WithdrawBalance(int nNumber, int nOption)
 // SetColor(10); => green text line
 // SetColor(7); => white text line
 
-   
-
-
 void ImportRecords()
 {
-    //csv
-    //xlsx
-    //txt
+    // csv
+    // xlsx
+    // txt
     puts("Keep file in same directory as the executable file");
-    // cout<<"Enter the file name to import: ";
-
-    fstream lImportCSVFile("import.csv", ios::in );
+    string lstrTemp = "";
+    cout << "Enter CSV file name without extension to import: ";
+    cin >> lstrTemp;
+     cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    fstream lImportCSVFile(lstrTemp+".csv", ios::in);
     if (!lImportCSVFile)
     {
         cout << "CSV File could not be opened !! Press any Key...";
         return;
     }
-    else{
+    else
+    {
         string s;
-        
- getline(lImportCSVFile,s,'\n');// remove header row
 
-        while(getline(lImportCSVFile,s,'\n'))
+        getline(lImportCSVFile, s, '\n'); // remove header row
+
+        while (getline(lImportCSVFile, s, '\n'))
         {
             CAccount lCAccount;
             stringstream lSS(s);
 
             string lTemp;
-            getline(lSS,lTemp,',');
+            getline(lSS, lTemp, ',');
             // lCAccount.m_nAccountNumber =lCAccount.GetAccountNumber();
             // cout<<CAccount::m_snNextAccountNum<<endl;
-        lCAccount.m_nAccountNumber =lCAccount.m_snNextAccountNum++;
-            getline(lSS,lTemp,',');
-            strcpy( lCAccount.m_strFirstName,lTemp.c_str());
-            getline(lSS,lTemp,',');
-            strcpy( lCAccount.m_strLastName,lTemp.c_str());
-            getline(lSS,lTemp,',');
+            lCAccount.m_nAccountNumber = lCAccount.m_snNextAccountNum++;
+            getline(lSS, lTemp, ',');
+            strcpy(lCAccount.m_strFirstName, lTemp.c_str());
+            getline(lSS, lTemp, ',');
+            strcpy(lCAccount.m_strLastName, lTemp.c_str());
+            getline(lSS, lTemp, ',');
             lCAccount.m_fSavingAccBalance = stof(lTemp);
-            getline(lSS,lTemp,',');
+            getline(lSS, lTemp, ',');
             lCAccount.m_fCurrentAccBalance = stof(lTemp);
-            getline(lSS,lTemp,',');
+            getline(lSS, lTemp, ',');
             lCAccount.m_cAccountType = lTemp[0];
-            getline(lSS,lTemp,',');
-            strcpy( lCAccount.m_strMobileNumber,lTemp.c_str());
-            getline(lSS,lTemp,',');
-            strcpy( lCAccount.m_strCityName,lTemp.c_str());
-            getline(lSS,lTemp,',');
-            strcpy(lCAccount.m_strEmail,lTemp.c_str());
-            getline(lSS,lTemp,',');
-            strcpy(lCAccount.m_strDematAccNumber,lTemp.c_str());
-            getline(lSS,lTemp,',');
-            lCAccount.m_fFixedDepositAmt=stof(lTemp);
-            getline(lSS,lTemp,',');
-            lCAccount.m_fMedicalInsCover=stof(lTemp);
-            getline(lSS,lTemp,',');
-            lCAccount.m_fMutualFundInvAmt=stof(lTemp);
-            getline(lSS,lTemp,',');
-            lCAccount.m_fLifeInsPolicyCover[0]=stof(lTemp);
-            getline(lSS,lTemp,',');
-            lCAccount.m_fLifeInsPolicyCover[1]=stof(lTemp);
-            getline(lSS,lTemp,',');
-            lCAccount.m_fLifeInsPolicyCover[2]=stof(lTemp);
-            getline(lSS,lTemp,',');
-            strcpy(lCAccount.m_strNominee[0],lTemp.c_str());
+            getline(lSS, lTemp, ',');
+            strcpy(lCAccount.m_strMobileNumber, lTemp.c_str());
+            getline(lSS, lTemp, ',');
+            strcpy(lCAccount.m_strCityName, lTemp.c_str());
+            getline(lSS, lTemp, ',');
+            strcpy(lCAccount.m_strEmail, lTemp.c_str());
+            getline(lSS, lTemp, ',');
+            strcpy(lCAccount.m_strDematAccNumber, lTemp.c_str());
+            getline(lSS, lTemp, ',');
+            lCAccount.m_fFixedDepositAmt = stof(lTemp);
+            getline(lSS, lTemp, ',');
+            lCAccount.m_fMedicalInsCover = stof(lTemp);
+            getline(lSS, lTemp, ',');
+            lCAccount.m_fMutualFundInvAmt = stof(lTemp);
+            getline(lSS, lTemp, ',');
+            lCAccount.m_fLifeInsPolicyCover[0] = stof(lTemp);
+            getline(lSS, lTemp, ',');
+            lCAccount.m_fLifeInsPolicyCover[1] = stof(lTemp);
+            getline(lSS, lTemp, ',');
+            lCAccount.m_fLifeInsPolicyCover[2] = stof(lTemp);
+            getline(lSS, lTemp, ',');
+            strcpy(lCAccount.m_strNominee[0], lTemp.c_str());
 
-            getline(lSS,lTemp,',');
-            strcpy(lCAccount.m_strNominee[1],lTemp.c_str());
-            getline(lSS,lTemp,',');
-            strcpy(lCAccount.m_strNominee[2],lTemp.c_str());
-            getline(lSS,lTemp,',');
-            strcpy(lCAccount.m_strNominee[3],lTemp.c_str());
-            getline(lSS,lTemp,',');
-            strcpy(lCAccount.m_strNominee[4],lTemp.c_str());
-            getline(lSS,lTemp,',');
-            strcpy(lCAccount.m_strNominee[5],lTemp.c_str());
-            getline(lSS,lTemp,',');
-           lCAccount.m_strAccountStatus=lTemp[0];// char
-            getline(lSS,lTemp,',');
+            getline(lSS, lTemp, ',');
+            strcpy(lCAccount.m_strNominee[1], lTemp.c_str());
+            getline(lSS, lTemp, ',');
+            strcpy(lCAccount.m_strNominee[2], lTemp.c_str());
+            getline(lSS, lTemp, ',');
+            strcpy(lCAccount.m_strNominee[3], lTemp.c_str());
+            getline(lSS, lTemp, ',');
+            strcpy(lCAccount.m_strNominee[4], lTemp.c_str());
+            getline(lSS, lTemp, ',');
+            strcpy(lCAccount.m_strNominee[5], lTemp.c_str());
+            getline(lSS, lTemp, ',');
+            lCAccount.m_strAccountStatus = lTemp[0]; // char
+            getline(lSS, lTemp, ',');
             lCAccount.m_cLocker = lTemp[0];
-            getline(lSS,lTemp,',');
+            getline(lSS, lTemp, ',');
             lCAccount.m_cPassbook = lTemp[0];
-            getline(lSS,lTemp,',');
+            getline(lSS, lTemp, ',');
             lCAccount.m_cEStatement = lTemp[0];
-    fstream outFile;
-   
-    outFile.open("bank.bin",ios::out| ios::binary | ios::app);
-    outFile.write(reinterpret_cast<char *>(&lCAccount), sizeof(CAccount));
-    outFile.close();
+            fstream outFile;
 
-
+            outFile.open("bank.bin", ios::out | ios::binary | ios::app);
+            outFile.write(reinterpret_cast<char *>(&lCAccount), sizeof(CAccount));
+            outFile.close();
         }
-    // // Read from csv
-    // // Create and fill object 
-    
-    // // Fill object
-    // // Write to binary
+        // // Read from csv
+        // // Create and fill object
 
-lImportCSVFile.close();
-puts("Records imported successfully");
-    // fstream out("bank.bin", ios::out | ios::binary);
+        // // Fill object
+        // // Write to binary
+
+        lImportCSVFile.close();
+        puts("Records imported successfully");
+        // fstream out("bank.bin", ios::out | ios::binary);
     }
-   
-    
-
 }
 void ExportRecords()
 {
-    //csv
-    //xlsx
-    //txt
-    //pdf
-    // 
-    //Read all binary 
+    // csv
+    // xlsx
+    // txt
+    // pdf
+    //
+    // Read all binary
     fstream lFStarBank;
-     lFStarBank.open("bank.bin",ios::in|ios::binary);
+    lFStarBank.open("bank.bin", ios::in | ios::binary);
     fstream lExportFile;
     // create csv file
-    lExportFile.open("export.csv",ios::out|ios::trunc);
+    remove("export.csv");
+    lExportFile.open("export.csv", ios::out | ios::trunc);
 
     // loop through all records
     CAccount lCAccount;
-    lExportFile<<"Account Number,First Name,Last Name,Saving Account Balance,Current Account Balance,Account Type,Mobile Number,City Name,Email Address,Demat Account Number,Fixed Deposit,Medical Insurance Cover,Mutual Fund Investment Amount,Cover0,Cover1,Cover2,Nominee0,Nominee1,Nominee2,Nominee3,Nominee4,Nominee5,Account Status,Locker,Passbook,E Statement";
-    lExportFile<<endl;
-    while(lFStarBank.read(reinterpret_cast<char *>(&lCAccount), sizeof(CAccount)))
+    lExportFile << "Account Number,First Name,Last Name,Saving Account Balance,Current Account Balance,Account Type,Mobile Number,City Name,Email Address,Demat Account Number,Fixed Deposit,Medical Insurance Cover,Mutual Fund Investment Amount,Cover0,Cover1,Cover2,Nominee0,Nominee1,Nominee2,Nominee3,Nominee4,Nominee5,Account Status,Locker,Passbook,E Statement";
+    lExportFile << endl;
+    while (lFStarBank.read(reinterpret_cast<char *>(&lCAccount), sizeof(CAccount)))
     {
         // Write to csv
-      lExportFile << lCAccount. m_nAccountNumber;
-      lExportFile<<',';
-    lExportFile << lCAccount. m_strFirstName;
-    lExportFile<<',';
-    lExportFile << lCAccount. m_strLastName;
-    lExportFile<<',';
-    lExportFile << lCAccount. m_fSavingAccBalance;
-    lExportFile<<',';
-    lExportFile << lCAccount. m_fCurrentAccBalance;
-    lExportFile<<',';
-    lExportFile << lCAccount. m_cAccountType;
-    lExportFile<<',';
-    lExportFile << lCAccount. m_strMobileNumber;
-    lExportFile<<',';
-    lExportFile << lCAccount. m_strCityName;
-    lExportFile<<',';
-    lExportFile << lCAccount. m_strEmail;
-    lExportFile<<',';
-    lExportFile << lCAccount. m_strDematAccNumber;
-    lExportFile<<',';
-    lExportFile << lCAccount. m_fFixedDepositAmt;
-    lExportFile<<',';   
-    lExportFile << lCAccount. m_fMedicalInsCover;
-    lExportFile<<',';
-    lExportFile << lCAccount. m_fMutualFundInvAmt;
-    lExportFile<<',';
-    lExportFile << lCAccount. m_fLifeInsPolicyCover[0];
-    lExportFile<<',';
-    lExportFile << lCAccount. m_fLifeInsPolicyCover[1];
-    lExportFile<<',';
-    lExportFile << lCAccount. m_fLifeInsPolicyCover[2];
-    lExportFile<<',';
-    lExportFile << lCAccount. m_strNominee[0];
-    
-    lExportFile<<',';
+        lExportFile << lCAccount.m_nAccountNumber;
+        lExportFile << ',';
+        lExportFile << lCAccount.m_strFirstName;
+        lExportFile << ',';
+        lExportFile << lCAccount.m_strLastName;
+        lExportFile << ',';
+        lExportFile << lCAccount.m_fSavingAccBalance;
+        lExportFile << ',';
+        lExportFile << lCAccount.m_fCurrentAccBalance;
+        lExportFile << ',';
+        lExportFile << lCAccount.m_cAccountType;
+        lExportFile << ',';
+        lExportFile << lCAccount.m_strMobileNumber;
+        lExportFile << ',';
+        lExportFile << lCAccount.m_strCityName;
+        lExportFile << ',';
+        lExportFile << lCAccount.m_strEmail;
+        lExportFile << ',';
+        lExportFile << lCAccount.m_strDematAccNumber;
+        lExportFile << ',';
+        lExportFile << lCAccount.m_fFixedDepositAmt;
+        lExportFile << ',';
+        lExportFile << lCAccount.m_fMedicalInsCover;
+        lExportFile << ',';
+        lExportFile << lCAccount.m_fMutualFundInvAmt;
+        lExportFile << ',';
+        lExportFile << lCAccount.m_fLifeInsPolicyCover[0];
+        lExportFile << ',';
+        lExportFile << lCAccount.m_fLifeInsPolicyCover[1];
+        lExportFile << ',';
+        lExportFile << lCAccount.m_fLifeInsPolicyCover[2];
+        lExportFile << ',';
+        lExportFile << lCAccount.m_strNominee[0];
 
-    lExportFile << lCAccount. m_strNominee[1];
-    lExportFile<<',';
-    lExportFile << lCAccount. m_strNominee[2];
-    lExportFile<<',';
-    lExportFile << lCAccount. m_strNominee[3];
-    lExportFile<<',';
-    lExportFile << lCAccount. m_strNominee[4];
-    lExportFile<<',';
-    lExportFile << lCAccount. m_strNominee[5];
-    lExportFile<<',';
-    lExportFile << lCAccount. m_strAccountStatus;
-    lExportFile<<',';
-    lExportFile << lCAccount. m_cLocker;
-    lExportFile<<',';
-    lExportFile << lCAccount. m_cPassbook;
+        lExportFile << ',';
 
-    lExportFile<<',';
-    lExportFile << lCAccount. m_cEStatement;
-    lExportFile<<'\n';
-    }    
+        lExportFile << lCAccount.m_strNominee[1];
+        lExportFile << ',';
+        lExportFile << lCAccount.m_strNominee[2];
+        lExportFile << ',';
+        lExportFile << lCAccount.m_strNominee[3];
+        lExportFile << ',';
+        lExportFile << lCAccount.m_strNominee[4];
+        lExportFile << ',';
+        lExportFile << lCAccount.m_strNominee[5];
+        lExportFile << ',';
+        lExportFile << lCAccount.m_strAccountStatus;
+        lExportFile << ',';
+        lExportFile << lCAccount.m_cLocker;
+        lExportFile << ',';
+        lExportFile << lCAccount.m_cPassbook;
+        lExportFile << ',';
+        lExportFile << lCAccount.m_cEStatement;
+        lExportFile << '\n';
+    }
     // save csv
     lFStarBank.close();
     lExportFile.close();
-  
-
-
 }
 // string GetSystemTime()
 // {
@@ -1463,10 +1534,10 @@ void ExportRecords()
 //     // Convert now to tm struct for local timezone
 //     tm *ltm = localtime(&now);
 //     // Print various components of tm structure.
-    
+
 //     // cout << "Time: " << 1 + ltm->tm_hour << ":";
 //     // cout << 1 + ltm->tm_min << ":";
 //     // cout << 1 + ltm->tm_sec << endl;
 //     return ltm->tm_mday+"-"+to_string(1 + ltm->tm_mon)+"-"+to_string(1900 + ltm->tm_year);
 // }
-//End
+// End
