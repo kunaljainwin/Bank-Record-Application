@@ -166,7 +166,8 @@ float CAccount::ValidateAmount(float fNumber)
         {
             cout << "Error....enter numeric value only\n";
             cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
         }
         else
         {
@@ -229,7 +230,8 @@ void CAccount::CreateAccount()
         cin >> m_strFirstName;
     }
     cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
 
     cout << "\nEnter the Last Name of the Account holder : ";
     cin >> m_strLastName;
@@ -239,14 +241,16 @@ void CAccount::CreateAccount()
         cout << "\nLast Name: ";
         cin >> m_strLastName;
     }
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
 
     while (true)
     {
         cout << "\nEnter Type of the Account (C/S) : ";
         cin >> m_cAccountType;
  cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
         if (m_cAccountType == 'C' || m_cAccountType == 'c' || m_cAccountType == 'S' || m_cAccountType == 's')
         {
             m_cAccountType = toupper(m_cAccountType);
@@ -255,7 +259,8 @@ void CAccount::CreateAccount()
         cout << "Please enter C/S only.";
     }   
     cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
 
     cout << "\nPlease Enter Initial Account Balance\nMin Balance for Saving Account: Rs 1000.";
     cout << "\nMin Balance for Current Account: Rs 5000.";
@@ -263,44 +268,54 @@ void CAccount::CreateAccount()
     {
         m_fSavingAccBalance = ValidateAmount(m_fSavingAccBalance);
          cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
         m_fCurrentAccBalance = 0;
     }
     else
     {
         m_fCurrentAccBalance = ValidateAmount(m_fCurrentAccBalance);
         cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
         m_fSavingAccBalance = 0;
     }
 
     cout << "\nEnter Your City Name: ";
     cin >> m_strCityName;
+     cin.clear();
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+
     while (!IsValidName(m_strCityName))
     {
         cout << "Plase enter a valid City Name: ";
         cin >> m_strCityName;
          cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
     }
    
 
     cout << "\nEnter Your Mobile Number : ";
     cin >> m_strMobileNumber;
  cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
     while (!IsValidMobileNumber(m_strMobileNumber))
     {
         cout << "Please enter a valid mobile number: ";
         cin >> m_strMobileNumber;
          cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
     }
 
     cout << "\nEnter Your Email: ";
     cin >> m_strEmail;
  cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
     while (!IsValidEmail(m_strEmail))
     {
         cout << "Enter a valid email: ";
@@ -337,7 +352,8 @@ void CAccount::CreateAccount()
                 cout << "\nDo you want to avail Locker facility? (Y/N): ";
                 cin >> m_cLocker;
                cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
 
                 if (m_cLocker == 'Y' || m_cLocker == 'y' || m_cLocker == 'N' || m_cLocker == 'n')
                 {
@@ -379,7 +395,8 @@ void CAccount::CreateAccount()
             cout << "\nPlease Enter an Amount for Fixed Deposit";
             m_fFixedDepositAmt = ValidateAmount(m_fFixedDepositAmt);
              cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
             cout << "\nTransaction successful. Your request is approved!";
             cout << "\nFixed Deposit of Rs " << m_fFixedDepositAmt << " has been created for A/C " << m_nAccountNumber;
             break;
@@ -387,7 +404,8 @@ void CAccount::CreateAccount()
             cout << "\nPlease Enter Medical Insurance Coverage Plan Amount";
             m_fMedicalInsCover = ValidateAmount(m_fMedicalInsCover);
            cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
             cout << "\nTransaction successful. Your request is approved!";
             cout << "\nYou are insured under medical insurance coverage of RS" << m_fMedicalInsCover;
             break;
@@ -403,7 +421,8 @@ void CAccount::CreateAccount()
 
                 m_fLifeInsPolicyCover[lnLifeInsPolicyCount] = ValidateAmount(lfSwapper);
                  cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
 
                 if (lnLifeInsPolicyCount == 2)
                 {
@@ -413,7 +432,8 @@ void CAccount::CreateAccount()
                 cout << "\nDo you want to add more?(Y/N) ";
                 cin >> lcFlagforLifeIns;
  cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
                 lnLifeInsPolicyCount++;
             }
 
@@ -429,28 +449,32 @@ void CAccount::CreateAccount()
                 cout << "\nEnter First Name ";
                 cin >> lcNomineeName;
                  cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
                 while (!IsValidName(lcNomineeName))
                 {
                     cout << "Name should have alphabets only and length in range 2-20.";
                     cout << "\nFirst Name: ";
                     cin >> lcNomineeName;
                      cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
                 }
                 strcpy(m_strNominee[lnNomineeCount], lcNomineeName);
 
                 cout << "\nEnter Last Name ";
                 cin >> lcNomineeName;
                  cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
                 while (!IsValidName(lcNomineeName))
                 {
                     cout << "Name should have alphabets only and length in range 2-20.";
                     cout << "\nLast Name: ";
                     cin >> lcNomineeName;
                      cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
                 }
                 strcpy(m_strNominee[lnNomineeCount + 1], lcNomineeName);
                 if (lnNomineeCount2 == 2)
@@ -471,7 +495,8 @@ void CAccount::CreateAccount()
             cout << "\nPlease Enter an Amount To Invest in our Star Mutual Fund";
             m_fMutualFundInvAmt = ValidateAmount(m_fMutualFundInvAmt);
              cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
 
             cout << "\nTransaction Successful. Your Request is Approved!";
             cout << "\nYou have Successfully Invested an Amount of RS " << m_fMutualFundInvAmt << " in Star Mutual Fund ";
@@ -483,13 +508,15 @@ void CAccount::CreateAccount()
             cout << "\nEnter here:";
             cin >> m_strDematAccNumber;
  cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
             while (!IsValidDematAccNumber(m_strDematAccNumber))
             {
                 cout << "Enter a Valid Demat Account Number: ";
                 cin >> m_strDematAccNumber;
                  cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
             }
             break;
         case 10:
@@ -547,7 +574,8 @@ void CAccount::Modify()
                 cout << "\nUpdate your choice for locker.\nDo you want to avail Locker facility? (Y/N): ";
                 cin >> m_cLocker;
                  cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
 
                 if (m_cLocker == 'Y' || m_cLocker == 'y' || m_cLocker == 'N' || m_cLocker == 'n')
                 {
@@ -563,7 +591,8 @@ void CAccount::Modify()
                 cout << "\nUpdate your choice for passbook.\nDo you want to avail Passbook facility? (Y/N): ";
                 cin >> m_cPassbook;
                  cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
 
                 if (m_cPassbook == 'Y' || m_cPassbook == 'y' || m_cPassbook == 'N' || m_cPassbook == 'n')
                 {
@@ -579,7 +608,8 @@ void CAccount::Modify()
                 cout << "\nUpdate your choice for eStatment.\nDo you want to avail eStatement facility? (Y/N): ";
                 cin >> m_cEStatement;
                  cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
 
                 if (m_cEStatement == 'Y' || m_cEStatement == 'y' || m_cEStatement == 'N' || m_cEStatement == 'n')
                 {
@@ -595,14 +625,16 @@ void CAccount::Modify()
             cout << "Your Choice: ";
             cin >> lnChoiceForFD;
              cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
             if (lnChoiceForFD == 1)
             {
 
                 cout << "\nPlase Enter an Amount for Investing More in Your Fixed Deposit.";
                 m_fFixedDepositAmt += ValidateAmount(lfAmtForFD);
  cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');                cout << "\nTransaction Successful. Your request is approved!";
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "\nTransaction Successful. Your request is approved!";
                 cout << "\nUpdated FD Balance: " << m_fFixedDepositAmt;
             }
             else if (lnChoiceForFD == 2)
@@ -610,7 +642,8 @@ void CAccount::Modify()
                 cout << "\nPlease Enter Amount to Withdraw from Your Fixed Deposit Account.";
                 lfAmtForFD2 = ValidateAmount(lfAmtForFD);
  cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');                if (lfAmtForFD2 <= m_fFixedDepositAmt)
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                if (lfAmtForFD2 <= m_fFixedDepositAmt)
                 {
                     m_fFixedDepositAmt -= lfAmtForFD2;
                     cout << "\nTransaction successful. Your request is approved!\nUpdated FD Balance: " << m_fFixedDepositAmt;
@@ -637,7 +670,8 @@ void CAccount::Modify()
 
             m_fMedicalInsCover = ValidateAmount(m_fMedicalInsCover);
              cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
             cout << "\nTransaction successful. Your request is approved!";
             cout << "\nYour new medical insurance coverage: RS" << m_fMedicalInsCover;
             break;
@@ -651,7 +685,8 @@ void CAccount::Modify()
 
                 m_fLifeInsPolicyCover[lnLifeInsPolicyCount] = ValidateAmount(lfSwapper);
              cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
 
                 if (lnLifeInsPolicyCount == 2)
                 {
@@ -661,7 +696,8 @@ void CAccount::Modify()
                 cout << "\nDo you want to add more?(Y/N) ";
                 cin >> lcFlagforLifeIns;
  cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
                 lnLifeInsPolicyCount++;
             }
 
@@ -677,27 +713,31 @@ void CAccount::Modify()
                 cout << "\nEnter First Name ";
                 cin >> lcNomineeName;
                  cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
                 while (!IsValidName(lcNomineeName))
                 {
                     cout << "Name should have alphabets only and length in range 2-20.";
                     cout << "\nFirst Name: ";
                     cin >> lcNomineeName;
                      cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
                 }
                 strcpy(m_strNominee[lnNomineeCount], lcNomineeName);
                 cout << "\nEnter Last Name ";
                 cin >> lcNomineeName;
                  cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
                 while (!IsValidName(lcNomineeName))
                 {
                     cout << "Name should have alphabets only and length in range 2-20.";
                     cout << "\nLast Name: ";
                     cin >> lcNomineeName;
                      cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
                 }
                 strcpy(m_strNominee[lnNomineeCount + 1], lcNomineeName);
                 if (lnNomineeCount2 == 2)
@@ -709,7 +749,8 @@ void CAccount::Modify()
                 cout << "\nDo you want to add more?(Y/N) ";
                 cin >> lcFlagForNominee;
                  cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
 
                 lnNomineeCount += 2;
                 lnNomineeCount2++;
@@ -722,17 +763,20 @@ void CAccount::Modify()
             cout << "Your Choice: ";
             cin >> lnChoiceForMF;
              cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
             if (lnChoiceForMF == 1)
             {
 
                 cout << "\nPlease enter amount to add to your Mutual Fund account";
                 cin >> lfAmtForMF;
                  cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
 
                 m_fMutualFundInvAmt += ValidateAmount(lfAmtForMF);
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
                 cout << "\nTransaction successful. Your request is approved!";
 
                 cout << "\nUpdated MF Investment: Rs " << m_fMutualFundInvAmt;
@@ -743,7 +787,8 @@ void CAccount::Modify()
 
                 lfAmtForMF2 = ValidateAmount(lfAmtForMF);
                  cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
                 if (lfAmtForMF2 <= m_fMutualFundInvAmt)
                 {
                     m_fMutualFundInvAmt -= lfAmtForMF2;
@@ -773,13 +818,15 @@ void CAccount::Modify()
             cout << "\nEnter here:";
             cin >> m_strDematAccNumber;
  cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
             while (!IsValidDematAccNumber(m_strDematAccNumber))
             {
                 cout << "Enter a valid Demat Account Number: ";
                 cin >> m_strDematAccNumber;
                  cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
             }
             cout << "Your Demat account number has been successfully updated....";
             break;
@@ -789,7 +836,8 @@ void CAccount::Modify()
                 cout << "\nUpdated Type of Account (C/S) : ";
                 cin >> lcTempForAccType;
                  cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
                 lcTempForAccType = toupper(lcTempForAccType);
                 if (lcTempForAccType == GetAccountType())
                 {
@@ -815,16 +863,19 @@ void CAccount::Modify()
             cout << "\nUpdated City Name: ";
             cin >> m_strCityName;
              cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
             while (!IsValidName(m_strCityName))
             {
                 cout << "Plase enter a valid City Name: ";
                 cin >> m_strCityName;
                  cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
             }
  cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');            cout << "Your city name has been successfully updated....";
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Your city name has been successfully updated....";
             break;
         case 12:
 
@@ -835,7 +886,8 @@ void CAccount::Modify()
                 cout << "Please enter a valid mobile number: ";
                 cin >> m_strMobileNumber;
                  cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
             }
 
             cout << "Your Mobile Number has been Successfully Updated....";
@@ -845,14 +897,16 @@ void CAccount::Modify()
             cout << "\nUpdated Email: ";
             cin >> m_strEmail;
              cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
             while (!IsValidEmail(m_strEmail))
             {
                 cout << "Enter a valid email: ";
 
                 cin >> m_strEmail;
                  cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
             }
             cout << "Your email has been successfully updated....";
             break;
@@ -1352,11 +1406,12 @@ void ImportRecords()
     // txt
     puts("Keep file in same directory as the executable file");
     string lstrTemp = "";
-    cout << "Enter CSV file name without extension to import: ";
+    cout << "Enter CSV file full name to import: ";
     cin >> lstrTemp;
-     cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    fstream lImportCSVFile(lstrTemp+".csv", ios::in);
+    cin.clear();
+    //    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    fstream lImportCSVFile(lstrTemp, ios::in);
     if (!lImportCSVFile)
     {
         cout << "CSV File could not be opened !! Press any Key...";
