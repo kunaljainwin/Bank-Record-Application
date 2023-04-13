@@ -1,16 +1,6 @@
-// #include <iostream>
-// #include <fstream>
-// #include <cctype>
-// #include <string>
-// #include <iomanip>
-// #include <regex>
-// #include <limits.h>
+
 #include <bits/stdc++.h>
-// For Excel handling
-// #include "libxl.h"//Not found
-// Time
-// #include<chrono>
-// #include <ctime>
+
 
 using namespace std;
 /****************************************************************************
@@ -220,8 +210,6 @@ void CAccount::CreateAccount()
     char lcFlagForNominee = 'y', lcFlagforLifeIns = 'y';
 
     cout << "\n\nEnter the First Name of the Account holder : ";
-    // cin.ignore();
-    // getline(cin,m_strFirstName);
     cin >> m_strFirstName;
     while (!IsValidName(m_strFirstName))
     {
@@ -1041,7 +1029,6 @@ void AutoIncrement()
     inFile.open("bank.bin", ios::binary | ios::in);
     if (!inFile)
     {
-
         cout << "No previous records found  !! Press any Key...";
         return;
     }
@@ -1430,8 +1417,6 @@ void ImportRecords()
 
             string lTemp;
             getline(lSS, lTemp, ',');
-            // lCAccount.m_nAccountNumber =lCAccount.GetAccountNumber();
-            // cout<<CAccount::m_snNextAccountNum<<endl;
             lCAccount.m_nAccountNumber = lCAccount.m_snNextAccountNum++;
             getline(lSS, lTemp, ',');
             strcpy(lCAccount.m_strFirstName, lTemp.c_str());
@@ -1492,22 +1477,16 @@ void ImportRecords()
         }
         // // Read from csv
         // // Create and fill object
-
         // // Fill object
         // // Write to binary
 
         lImportCSVFile.close();
         puts("Records imported successfully");
-        // fstream out("bank.bin", ios::out | ios::binary);
     }
 }
 void ExportRecords()
 {
-    // csv
-    // xlsx
-    // txt
-    // pdf
-    //
+    
     // Read all binary
     fstream lFStarBank;
     lFStarBank.open("bank.bin", ios::in | ios::binary);
@@ -1525,6 +1504,7 @@ void ExportRecords()
         // Write to csv
         lExportFile << lCAccount.m_nAccountNumber;
         lExportFile << ',';
+        
         lExportFile << lCAccount.m_strFirstName;
         lExportFile << ',';
         lExportFile << lCAccount.m_strLastName;

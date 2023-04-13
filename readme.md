@@ -26,3 +26,5 @@ problem in export records-> Leading to program termination
 
 
 problem was due to use of string variable in structure
+
+- Run with all details filled
